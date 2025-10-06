@@ -1,6 +1,7 @@
 com/engenharia_softeare/gerador_curriculo/GeradorCurriculoApplication.class
 com/engenharia_softeare/gerador_curriculo/llms/applications/usecases/GerarCurriculoUseCase.class
 com/engenharia_softeare/gerador_curriculo/llms/infra/controllers/LlmController.class
+com/engenharia_softeare/gerador_curriculo/shared/config/CorsConfig.class
 com/engenharia_softeare/gerador_curriculo/shared/config/WebConfig.class
 com/engenharia_softeare/gerador_curriculo/llms/applications/usecases/GerarPerguntasUseCase.class
 com/engenharia_softeare/gerador_curriculo/shared/environment/EnvironmentUtils.class

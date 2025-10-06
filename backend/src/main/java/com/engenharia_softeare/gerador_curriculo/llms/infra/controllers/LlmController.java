@@ -5,13 +5,11 @@ import com.engenharia_softeare.gerador_curriculo.llms.applications.usecases.Gera
 import com.engenharia_softeare.gerador_curriculo.llms.infra.controllers.dto.request.AreaAtuacaoRequestDTO;
 import com.engenharia_softeare.gerador_curriculo.llms.infra.controllers.dto.request.GerarCurriculoRequestDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/llm")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, allowedHeaders = "*")
 public class LlmController {
 
     private final GerarPerguntasUseCase gerarPerguntasUseCase;
@@ -30,5 +28,15 @@ public class LlmController {
     @PostMapping("/gerar-curriculo")
     public ResponseEntity<String> gerarCurriculo(@RequestBody GerarCurriculoRequestDTO dto) {
         return ResponseEntity.ok(gerarCurriculoUseCase.gerar(dto));
+    }
+
+    @RequestMapping(value = "/gerar-perguntas", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptions() {
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/gerar-curriculo", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptionsCurriculo() {
+        return ResponseEntity.ok().build();
     }
 }

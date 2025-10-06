@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 type PerguntasResponse = { perguntas: string[] };
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080';
+const API_BASE = '/api';
 
 function LoadingOverlay({ visible, text }: { visible: boolean; text: string }) {
   if (!visible) return null;
@@ -52,7 +52,7 @@ function Home() {
 }
 
 function Perguntas() {
-  const [area, setArea] = useState('Desenvolvedor Front-End');
+  const [area, setArea] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [perguntas, setPerguntas] = useState<string[]>([]);
@@ -68,7 +68,8 @@ function Perguntas() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ areaAtuacao: area })
       });
-      if (!res.ok) throw new Error('Falha ao obter perguntas');
+      
+      if (!res.ok) throw new Error(`Falha ao obter perguntas: ${res.status} ${res.statusText}`);
       const txt = await res.text();
       const data = JSON.parse(txt) as PerguntasResponse;
       setPerguntas(data.perguntas ?? []);
